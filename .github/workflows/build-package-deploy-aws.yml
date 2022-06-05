@@ -24,3 +24,19 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
+    - name: Create Time Stamp for Version Info
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 8
+          format: 'YYYY-MM-DD-HH-mm-ss'
+    - name: Make Artifact Available
+      uses: actions/upload-artifact@v3
+      with:
+        name: "Artifact-${{steps.time.outputs.time}}"
+        path: target
+      retention-days: 5
+
+
+
+
