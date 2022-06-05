@@ -46,7 +46,7 @@ jobs:
           application_name: my-demo-app
           environment_name: Mydemoapp-env
           version_label: SpringBootProdApp- ${{steps.time.outputs.time}}
-          region: Global
+          region: us-east-1
           deployment_package: target/my-docker-demo.jar
 
 
