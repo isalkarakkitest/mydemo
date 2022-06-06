@@ -39,16 +39,27 @@ jobs:
         path: target
         retention-days: 5
 
-    - name: Beanstalk Deploy for JAR
-      uses: DylanBDev/beanstalk-deploy@initial
-      with:
-        aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID}}
-        aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
-        application_name: my-demo-app1
-        environment_name: Mydemoapp-env
-        version_label: SpringBootProdApp- ${{steps.time.outputs.time}}
-        region: Global
-        deployment_package: target/my-docker-demo.jar
+#    - name: Beanstalk Deploy for JAR
+#      uses: DylanBDev/beanstalk-deploy@initial
+#      with:
+#        aws_access_key: ${{secrets.AWS_ACCESS_KEY_ID}}
+#        aws_secret_key: ${{secrets.AWS_SECRET_ACCESS_KEY}}
+#        application_name: my-demo-app1
+#        environment_name: Mydemoapp-env
+#        version_label: SpringBootProdApp- ${{steps.time.outputs.time}}
+#        region: Global
+#        deployment_package: target/my-docker-demo.jar
+
+    - name: Deploy to EB
+        uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: MyApplicationName
+          environment_name: MyApplication-Environment
+          version_label: 12345
+          region: us-west-2
+          deployment_package: target/my-docker-demo.jar
 
 
 
